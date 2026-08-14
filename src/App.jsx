@@ -6,6 +6,7 @@ import Pricing from './components/Pricing.jsx'
 import Reviews from './components/Reviews.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
+import MobileCta from './components/MobileCta.jsx'
 import useReveal from './hooks/useReveal.js'
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <MobileCta />
     </>
   )
 }

@@ -33,6 +33,8 @@ export default function Pricing() {
           </button>
         </div>
 
+        <p className="swipe-hint">Scorri per confrontare i piani →</p>
+
         <div className="plans">
           {pricing.plans.map((plan, i) => (
             <article

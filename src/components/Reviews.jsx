@@ -21,6 +21,8 @@ export default function Reviews() {
           <h2>{reviews.title}</h2>
         </header>
 
+        <p className="swipe-hint">Scorri per leggerle tutte →</p>
+
         <div className="reviews">
           {reviews.items.map((r, i) => (
             <figure key={r.name} className="card review" data-reveal style={{ '--d': `${i * 0.06}s` }}>

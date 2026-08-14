@@ -58,14 +58,23 @@ export default function Navbar() {
       </div>
 
       <div className="nav__sheet" onClick={() => setOpen(false)}>
-        {nav.map((item) => (
-          <a key={item.href} href={item.href}>
-            {item.label}
+        <div className="nav__sheet-links">
+          {nav.map((item, i) => (
+            <a key={item.href} href={item.href}>
+              <span className="nav__sheet-n">0{i + 1}</span>
+              {item.label}
+            </a>
+          ))}
+        </div>
+
+        <div className="nav__sheet-foot">
+          <a className="btn btn--primary btn--lg btn--full" href="#prezzi">
+            Inizia gratis
           </a>
-        ))}
-        <a className="btn btn--primary" href="#prezzi">
-          Inizia gratis
-        </a>
+          <a className="nav__sheet-mail" href={`mailto:${brand.email}`}>
+            {brand.email}
+          </a>
+        </div>
       </div>
     </header>
   )
