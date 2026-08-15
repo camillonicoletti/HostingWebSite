@@ -258,9 +258,10 @@ textarea {
   height: 38px;
 }
 
-@media (max-width: 560px) {
-  .nav__logo {
-    height: 28px;
+@media (max-width: 860px) {
+  .nav__logo,
+  .footer__brand .nav__logo {
+    height: 40px;
   }
 }
 
