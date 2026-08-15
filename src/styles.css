@@ -1251,21 +1251,21 @@ textarea {
 
 .float--a {
   top: -4%;
-  left: -26%;
+  left: -34%;
   color: var(--azure);
   animation-delay: -2s;
 }
 
 .float--b {
   top: 44%;
-  right: -24%;
+  right: -32%;
   color: var(--clay-soft);
   animation-delay: -5s;
 }
 
 .float--c {
-  bottom: -5%;
-  left: -20%;
+  bottom: -4%;
+  left: -46%;
   animation-delay: -7.5s;
 }
 
@@ -1390,25 +1390,35 @@ textarea {
 }
 
 /* =========================================================
-   bento funzionalità
+   slider delle sezioni (prodotto)
    ========================================================= */
-.bento {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 16px;
+.rail-wrap {
+  position: relative;
 }
 
-/* riga 1: 4+2 · riga 2: 3+3 · riga 3: 2+2+2 */
-.bento__item--lg {
-  grid-column: span 4;
+.rail {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-block: 6px 22px;
 }
 
-.bento__item--md {
-  grid-column: span 3;
+.rail::-webkit-scrollbar {
+  display: none;
 }
 
-.bento__item--sm {
-  grid-column: span 2;
+.rail__item {
+  flex: 0 0 clamp(228px, 70vw, 268px);
+  scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.rail__item p {
+  font-size: 0.9rem;
 }
 
 .card__icon {
@@ -1491,73 +1501,257 @@ textarea {
 }
 
 /* =========================================================
-   prezzi
+   proprietà, privacy, pubblicazione
    ========================================================= */
-.toggle {
-  display: inline-flex;
-  gap: 4px;
-  padding: 5px;
-  margin-bottom: 40px;
-  border-radius: 999px;
-  border: 1px solid var(--stroke);
-  background: var(--surface);
+.own {
+  display: grid;
+  gap: 16px;
 }
 
-.toggle button {
+.own__side {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.deed {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(20px, 5vw, 26px);
+  border-radius: var(--r-lg);
+  border: 1px solid rgba(226, 103, 63, 0.34);
+  background:
+    linear-gradient(155deg, rgba(246, 239, 225, 0.12), rgba(255, 255, 255, 0.02) 48%),
+    rgba(255, 255, 255, 0.03);
+  box-shadow: var(--shadow);
+}
+
+.deed__shine {
+  position: absolute;
+  inset: -60% -20%;
+  background: linear-gradient(
+    100deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.14) 48%,
+    transparent 58%
+  );
+  animation: sweep 7s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes sweep {
+  0%,
+  55% {
+    transform: translateX(-60%);
+  }
+  85%,
+  100% {
+    transform: translateX(60%);
+  }
+}
+
+.deed__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.deed__label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.deed__seal {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 9px 20px;
-  border: 0;
+  gap: 6px;
+  padding: 5px 11px;
   border-radius: 999px;
-  background: transparent;
-  color: var(--muted);
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.35s var(--ease), color 0.35s var(--ease);
-}
-
-.toggle button.is-on {
-  background: var(--surface-2);
-  color: var(--text);
-  box-shadow: inset 0 0 0 1px var(--stroke);
-}
-
-.toggle em {
-  font-style: normal;
-  font-size: 0.72rem;
-  padding: 2px 8px;
-  border-radius: 999px;
-  background: rgba(157, 178, 115, 0.18);
+  border: 1px solid rgba(157, 178, 115, 0.45);
+  background: rgba(157, 178, 115, 0.14);
   color: var(--olive);
+  font-size: 0.68rem;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
-.plans {
+.deed__domain {
+  margin-top: 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(0.9rem, 4vw, 1.1rem);
+  letter-spacing: -0.01em;
+  color: var(--text);
+  word-break: break-word;
+}
+
+.deed__grid {
+  margin-top: 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.deed__rows div + div {
+  margin-top: 11px;
+}
+
+.deed__rows dt {
+  font-size: 0.64rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.deed__rows dd {
+  margin: 3px 0 0;
+  font-size: 0.87rem;
+  color: var(--text);
+}
+
+.deed__qr {
+  position: relative;
+  flex: none;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  grid-template-columns: repeat(11, 1fr);
+  gap: 1.5px;
+  width: 92px;
+  height: 92px;
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px solid var(--stroke);
+  background: rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.deed__qr i {
+  border-radius: 1px;
+}
+
+.deed__qr i.is-on {
+  background: var(--cream);
+}
+
+.deed__qr::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 22px;
+  background: linear-gradient(180deg, transparent, rgba(226, 103, 63, 0.55), transparent);
+  animation: scanline 3.4s ease-in-out infinite;
+}
+
+@keyframes scanline {
+  0%,
+  100% {
+    transform: translateY(-24px);
+  }
+  50% {
+    transform: translateY(94px);
+  }
+}
+
+/* passaggi */
+/* da mobile: due per riga; da tablet in su: fila unica con la linea */
+.flow {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 2px 0;
+}
+
+.flow::before {
+  content: '';
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--clay), var(--azure));
+  opacity: 0.45;
+  display: none;
+}
+
+.flow__step {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 13px;
+  border-radius: 999px;
+  border: 1px solid var(--stroke);
+  background: #0a0f18;
+  font-size: clamp(0.72rem, 2.9vw, 0.82rem);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.flow__n {
+  display: grid;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--grad);
+  color: #12070a;
+  font-size: 0.62rem;
+  font-weight: 800;
+}
+
+/* punti chiave */
+.own__points {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.point {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px;
+}
+
+.point__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 13px;
+  border: 1px solid var(--stroke);
+  background: rgba(106, 157, 255, 0.13);
+  color: var(--azure);
+}
+
+.point h3 {
+  margin: 6px 0 7px;
+  font-size: 1.06rem;
+}
+
+.point p {
+  font-size: 0.9rem;
+}
+
+/* =========================================================
+   prezzo: una tantum + assistenza
+   ========================================================= */
+.offer {
+  display: grid;
+  gap: 16px;
   align-items: start;
 }
 
-.plan {
-  display: flex;
-  flex-direction: column;
-}
-
-.plan--hot {
-  border-color: rgba(226, 103, 63, 0.45);
-  background:
-    linear-gradient(180deg, rgba(226, 103, 63, 0.14), rgba(255, 255, 255, 0.02) 42%),
-    rgba(255, 255, 255, 0.02);
-  box-shadow: var(--shadow-lift);
-}
-
-.plan__flag {
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  padding: 5px 12px;
+.offer__badge {
+  display: inline-flex;
+  width: max-content;
+  padding: 5px 13px;
   border-radius: 999px;
   background: var(--grad);
   color: #12070a;
@@ -1566,54 +1760,64 @@ textarea {
   letter-spacing: 0.02em;
 }
 
-.plan__name {
-  font-size: 1.3rem;
-  margin: 0;
+.offer__badge--soft {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--stroke);
+  color: var(--muted);
 }
 
-.plan__tagline {
-  margin-top: 6px;
-  color: var(--dim);
-  font-size: 0.88rem;
+.offer__main {
+  border-color: rgba(226, 103, 63, 0.42);
+  background:
+    linear-gradient(180deg, rgba(226, 103, 63, 0.14), rgba(255, 255, 255, 0.02) 46%),
+    rgba(255, 255, 255, 0.02);
+  box-shadow: var(--shadow-lift);
 }
 
-.plan__price {
+.offer__price {
   display: flex;
-  align-items: baseline;
-  gap: 4px;
-  margin-top: 26px;
+  align-items: flex-start;
+  gap: 6px;
+  margin-top: 16px;
 }
 
-.plan__cur {
-  font-size: 1.3rem;
-  color: var(--muted);
-}
-
-.plan__num {
-  font-size: 3.2rem;
+.offer__num {
+  font-size: clamp(3.6rem, 15vw, 4.6rem);
   font-weight: 800;
-  letter-spacing: -0.05em;
-  line-height: 1;
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-.plan__per {
-  font-size: 0.92rem;
+.offer__cur {
+  margin-top: 0.35em;
+  font-size: 1.5rem;
+  font-weight: 600;
   color: var(--muted);
 }
 
-.plan__cycle {
-  margin: 6px 0 22px;
-  font-size: 0.78rem;
+.offer__unit {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.offer__lead {
+  margin: 8px 0 22px;
+  font-size: 0.88rem;
   color: var(--dim);
 }
 
-.plan__list {
-  margin-top: 26px;
+.offer__list {
+  margin-top: 24px;
   display: grid;
   gap: 12px;
 }
 
-.plan__list li {
+.offer__list li {
   display: flex;
   align-items: flex-start;
   gap: 10px;
@@ -1621,9 +1825,92 @@ textarea {
   color: var(--muted);
 }
 
-.plan__list .icon {
+.offer__list .icon {
   color: var(--olive);
   margin-top: 2px;
+}
+
+.offer__title {
+  margin-top: 16px;
+  font-size: 1.4rem;
+}
+
+.offer__free {
+  margin-top: 7px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--olive);
+}
+
+.ladder {
+  position: relative;
+  margin: 22px 0 20px;
+  padding-left: 20px;
+  display: grid;
+}
+
+.ladder::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 14px;
+  bottom: 14px;
+  width: 1.5px;
+  background: linear-gradient(180deg, var(--olive), var(--clay), transparent);
+}
+
+.ladder__row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px dashed var(--stroke);
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.ladder__row:last-child {
+  border-bottom: 0;
+}
+
+.ladder__dot {
+  position: absolute;
+  left: -20px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1.5px solid var(--dim);
+}
+
+.ladder__row.is-free .ladder__dot {
+  border-color: var(--olive);
+  box-shadow: 0 0 0 3px rgba(157, 178, 115, 0.16);
+}
+
+.ladder__row.is-paid .ladder__dot {
+  border-color: var(--clay);
+  box-shadow: 0 0 0 3px rgba(226, 103, 63, 0.16);
+}
+
+.ladder__v {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.ladder__row.is-free .ladder__v {
+  color: var(--olive);
+}
+
+.ladder__row.is-paid .ladder__v {
+  color: var(--clay-soft);
+}
+
+.offer__body {
+  font-size: 0.9rem;
+  color: var(--muted);
 }
 
 .plans__note {
@@ -1937,6 +2224,7 @@ textarea {
 .swipe-hint {
   display: none;
   margin-bottom: 14px;
+  margin-top: -18px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.68rem;
   letter-spacing: 0.14em;
@@ -1980,17 +2268,10 @@ textarea {
     right: calc(100% + 16px);
   }
 
-  .bento__item--lg,
-  .bento__item--md,
-  .bento__item--sm {
-    grid-column: span 3;
-  }
-
   .steps {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .plans,
   .reviews {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -2281,19 +2562,8 @@ textarea {
     font-size: 0.92rem;
   }
 
-  /* --- bento in colonna, prima card in evidenza --- */
-  .bento {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .bento__item--lg,
-  .bento__item--md,
-  .bento__item--sm {
-    grid-column: span 1;
-  }
-
-  .bento__item:first-child {
+  /* --- prima card dello slider in evidenza --- */
+  .rail__item:first-child {
     background: linear-gradient(165deg, rgba(226, 103, 63, 0.16), rgba(255, 255, 255, 0.02) 55%);
     border-color: rgba(226, 103, 63, 0.3);
   }
@@ -2346,16 +2616,11 @@ textarea {
     font-size: 0.7rem;
   }
 
-  /* --- prezzi e recensioni: caroselli con snap --- */
+  /* --- recensioni: carosello con snap --- */
   .swipe-hint {
     display: block;
   }
 
-  .toggle {
-    margin-bottom: 22px;
-  }
-
-  .plans,
   .reviews {
     display: flex;
     grid-template-columns: none;
@@ -2368,14 +2633,8 @@ textarea {
     padding: 4px var(--pad) 18px;
   }
 
-  .plans::-webkit-scrollbar,
   .reviews::-webkit-scrollbar {
     display: none;
-  }
-
-  .plan {
-    flex: 0 0 82%;
-    scroll-snap-align: center;
   }
 
   .review {
@@ -2385,10 +2644,6 @@ textarea {
 
   .card:hover {
     transform: none;
-  }
-
-  .plan__num {
-    font-size: 2.8rem;
   }
 
   .plans__note {
@@ -2441,6 +2696,67 @@ textarea {
 
   .mcta {
     display: flex;
+  }
+}
+
+/* =========================================================
+   da tablet in su
+   ========================================================= */
+@media (min-width: 861px) {
+  .swipe-hint--always {
+    display: block;
+  }
+
+  /* telefono più stretto e più alto, da vero smartphone */
+  .phone {
+    width: min(302px, 78vw);
+  }
+
+  .phone__body {
+    padding: 12px;
+    border-radius: 48px;
+  }
+
+  .phone__screen {
+    display: flex;
+    flex-direction: column;
+    min-height: 636px;
+    border-radius: 38px;
+    padding: 46px 14px 14px;
+  }
+
+  .app__grid {
+    flex: 1;
+    grid-auto-rows: 1fr;
+  }
+
+  .app__card {
+    height: auto;
+  }
+
+  .own {
+    grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+    gap: 26px;
+  }
+
+  .offer {
+    grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+    gap: 18px;
+  }
+
+  .rail__item {
+    flex-basis: 272px;
+  }
+
+  .flow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+  }
+
+  .flow::before {
+    display: block;
   }
 }
 

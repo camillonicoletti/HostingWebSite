@@ -11,14 +11,15 @@ export default function Features() {
           <p>{features.subtitle}</p>
         </header>
 
-        <div className="bento">
-          {features.items.map((item, i) => (
-            <article
-              key={item.title}
-              className={`card bento__item bento__item--${item.size}`}
-              data-reveal
-              style={{ '--d': `${i * 0.06}s` }}
-            >
+        <p className="swipe-hint swipe-hint--always" data-reveal>
+          {features.hint}
+        </p>
+      </div>
+
+      <div className="rail-wrap" data-reveal>
+        <div className="rail container">
+          {features.items.map((item) => (
+            <article key={item.title} className="card rail__item">
               <div className="card__glow" aria-hidden="true" />
               <span className="card__icon">
                 <Icon name={item.icon} size={20} />

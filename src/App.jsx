@@ -2,6 +2,7 @@ import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
 import Features from './components/Features.jsx'
 import Steps from './components/Steps.jsx'
+import Ownership from './components/Ownership.jsx'
 import Pricing from './components/Pricing.jsx'
 import Reviews from './components/Reviews.jsx'
 import Contact from './components/Contact.jsx'
@@ -19,6 +20,7 @@ export default function App() {
         <Hero />
         <Features />
         <Steps />
+        <Ownership />
         <Pricing />
         <Reviews />
         <Contact />

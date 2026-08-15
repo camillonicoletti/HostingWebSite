@@ -1,9 +1,9 @@
-// Tutti i testi del sito. Copy inventato: da sostituire con quello definitivo.
+// Tutti i testi del sito. Copy da rifinire, dati commerciali reali.
 
 export const brand = {
-  name: 'Ospita',
+  name: 'LaMiaCasa',
   claim: 'La casa che si spiega da sola',
-  email: 'ciao@ospita.app',
+  email: 'ciao@lamiacasa.app',
   phone: '+39 351 000 1234',
   city: 'Milano · Italia',
 }
@@ -11,22 +11,22 @@ export const brand = {
 export const nav = [
   { label: 'Prodotto', href: '#prodotto' },
   { label: 'Come funziona', href: '#come-funziona' },
-  { label: 'Prezzi', href: '#prezzi' },
+  { label: 'Tuo per sempre', href: '#tuo' },
+  { label: 'Prezzo', href: '#prezzo' },
   { label: 'Recensioni', href: '#recensioni' },
-  { label: 'Contatti', href: '#contatti' },
 ]
 
 export const hero = {
   eyebrow: 'Guest experience · nessuna app da installare',
   title: ['Tutta la tua casa', 'in un solo link.'],
   subtitle:
-    'Ospita trasforma le istruzioni sparse tra WhatsApp, PDF e bigliettini in una web app elegante: check-in, Wi-Fi, trasporti, ristoranti e check-out a portata di pollice, in cinque lingue.',
+    'LaMiaCasa raccoglie le istruzioni sparse tra WhatsApp, PDF e bigliettini in una web app elegante: check-in, Wi-Fi, trasporti, ristoranti e check-out a portata di pollice. La paghi una volta e resta tua.',
   primaryCta: 'Prova la demo live',
   secondaryCta: 'Guarda come funziona',
   stats: [
-    { value: '2.400+', label: 'case già accolgono con Ospita' },
+    { value: '49 €', label: 'una tantum, per struttura' },
     { value: '-72%', label: 'messaggi ricevuti dagli ospiti' },
-    { value: '4,93', label: 'media recensioni dei nostri host' },
+    { value: '3 gg', label: 'dal tuo testo alla casa online' },
   ],
 }
 
@@ -56,164 +56,142 @@ export const marquee = [
 
 export const features = {
   eyebrow: 'Il prodotto',
-  title: 'Un concierge digitale che lavora anche mentre dormi',
-  subtitle:
-    'Ogni casa ha la sua guida: tu la componi con dei blocchi, noi la rendiamo veloce, multilingua e bellissima su qualsiasi telefono.',
+  title: 'Un bottone per ogni domanda che ti fanno',
+  subtitle: 'Tieni le sezioni che ti servono, togli quelle che non usi, inventane di nuove.',
+  hint: 'Scorri le sezioni →',
   items: [
-    {
-      tag: 'Arrivo',
-      title: 'Check-in senza telefonate',
-      body: 'Foto del portone, piano, numero della cassetta, video di 20 secondi che mostra come girare la chiave. L’ospite arriva alle 2 di notte e non ti scrive.',
-      icon: 'pin',
-      size: 'lg',
-    },
-    {
-      tag: 'Connessione',
-      title: 'Wi-Fi in un tap',
-      body: 'Password copiata negli appunti o QR da inquadrare. Zero errori di trascrizione.',
-      icon: 'wifi',
-      size: 'sm',
-    },
-    {
-      tag: 'Quartiere',
-      title: 'I tuoi consigli, non quelli di TripAdvisor',
-      body: 'Il forno sotto casa, la trattoria del giovedì, il parco giusto per i bambini: ogni consiglio con distanza a piedi e link alle mappe.',
-      icon: 'fork',
-      size: 'md',
-    },
-    {
-      tag: 'Mobilità',
-      title: 'Trasporti spiegati bene',
-      body: 'Dalla stazione a casa tua passo passo: quale bus, quale biglietto, quanto costa, quanto ci mette.',
-      icon: 'train',
-      size: 'md',
-    },
-    {
-      tag: 'Lingue',
-      title: 'IT · EN · FR · ES · DE',
-      body: 'Traduzione automatica al primo salvataggio, con possibilità di correggere ogni parola a mano.',
-      icon: 'globe',
-      size: 'sm',
-    },
-    {
-      tag: 'Partenza',
-      title: 'Check-out senza malintesi',
-      body: 'Orario, dove lasciare le chiavi, cosa fare con la spazzatura e un promemoria gentile per la recensione.',
-      icon: 'check',
-      size: 'sm',
-    },
-    {
-      tag: 'Su misura',
-      title: 'Personalizzabile fino all’ultimo pixel',
-      body: 'Colori, logo, nome della casa, ordine dei bottoni, sezioni inventate da zero: ogni appartamento ha la sua identità.',
-      icon: 'sparkle',
-      size: 'sm',
-    },
+    { icon: 'pin', tag: 'Arrivo', title: 'Check-in', body: 'Foto del portone, piano e istruzioni per le chiavi.' },
+    { icon: 'wifi', tag: 'Rete', title: 'Wi-Fi', body: 'Password copiata con un tap, senza errori di trascrizione.' },
+    { icon: 'home', tag: 'Casa', title: 'Regole', body: 'Orari, rumore, fumo, animali: chiare e brevi.' },
+    { icon: 'fork', tag: 'Zona', title: 'Dove mangiare', body: 'I tuoi posti del cuore, con distanza a piedi.' },
+    { icon: 'cart', tag: 'Spesa', title: 'Supermercati', body: 'Il più vicino e quello aperto la domenica.' },
+    { icon: 'train', tag: 'Mobilità', title: 'Trasporti', body: 'Che mezzo prendere, quanto costa, quanto ci mette.' },
+    { icon: 'cross', tag: 'Salute', title: 'Farmacie', body: 'Guardia medica e ospedale più vicini.' },
+    { icon: 'recycle', tag: 'Rifiuti', title: 'Raccolta', body: 'Il calendario del quartiere, per evitare multe.' },
+    { icon: 'check', tag: 'Partenza', title: 'Check-out', body: 'Orario, chiavi, spazzatura e saluti.' },
+    { icon: 'globe', tag: 'Lingue', title: '5 lingue', body: 'IT · EN · FR · ES · DE, riviste a mano.' },
   ],
 }
 
 export const steps = {
   eyebrow: 'Come funziona',
-  title: 'Online in un pomeriggio, non in un trimestre',
+  title: 'Dalla tua descrizione alla casa online',
   items: [
     {
       n: '01',
       title: 'Ci racconti la casa',
-      body: 'Compili un questionario guidato oppure ci mandi il PDF e i messaggi che usi oggi: pensiamo noi a trasformarli in contenuti.',
+      body: 'Un questionario guidato, oppure ci mandi il PDF e i messaggi che usi oggi.',
     },
     {
       n: '02',
-      title: 'Costruiamo la tua web app',
-      body: 'Scegli i bottoni, carichi foto e video, definisci colori e lingue. Anteprima in tempo reale mentre modifichi.',
+      title: 'Costruiamo la web app',
+      body: 'Scegliamo insieme sezioni, colori e lingue. Tu guardi l’anteprima e correggi.',
     },
     {
       n: '03',
-      title: 'Consegni un link e un QR',
-      body: 'Un QR incorniciato all’ingresso, il link nel messaggio di benvenuto di Airbnb o Booking. Gli ospiti aprono e capiscono tutto.',
+      title: 'La mettiamo online',
+      body: 'Indirizzo web attivo, QR pronto da stampare e link da incollare su Airbnb o Booking.',
     },
     {
       n: '04',
-      title: 'Aggiorni quando vuoi',
-      body: 'Cambi la password del Wi-Fi dal telefono: aggiornata per tutti in due secondi, senza ristampare nulla.',
+      title: 'Te la consegniamo',
+      body: 'Da quel momento è tua: paghi una volta e non ci sono rinnovi da ricordare.',
+    },
+  ],
+}
+
+export const ownership = {
+  eyebrow: 'Tuo per sempre',
+  title: 'Non è in affitto: te la consegniamo',
+  subtitle:
+    'Nessun abbonamento da rinnovare, nessun dato dei tuoi ospiti da custodire. Ecco cosa succede dal momento in cui ci scrivi.',
+  card: {
+    label: 'Certificato di consegna',
+    domain: 'lamiacasa.app/villa-magnolie',
+    seal: 'Proprietà 100%',
+    rows: [
+      { k: 'Intestato a', v: 'Villa Magnolie — Milano' },
+      { k: 'Consegnata il', v: '12 settembre 2026' },
+      { k: 'Contenuti e sorgente', v: 'nelle tue mani' },
+    ],
+  },
+  flow: ['Ci scrivi', 'Costruiamo', 'Approvi', 'Online'],
+  points: [
+    {
+      icon: 'shield',
+      tag: 'Proprietà',
+      title: 'Le chiavi passano a te',
+      body: 'Indirizzo, contenuti e file sorgente sono tuoi: puoi spostarli altrove quando vuoi.',
+    },
+    {
+      icon: 'globe',
+      tag: 'Privacy',
+      title: 'Zero dati sugli ospiti',
+      body: 'Niente account, niente cookie di tracciamento, niente profilazione: chi apre il link non lascia tracce.',
+    },
+    {
+      icon: 'bolt',
+      tag: 'Pubblicazione',
+      title: 'Online su rete veloce',
+      body: 'Pagine statiche distribuite su CDN: si aprono in un istante anche con una tacca di segnale.',
+    },
+    {
+      icon: 'sparkle',
+      tag: 'Manutenzione',
+      title: 'Non si rompe da sola',
+      body: 'Senza database e senza login non c’è nulla da aggiornare: resta com’è, anche fra tre anni.',
     },
   ],
 }
 
 export const pricing = {
-  eyebrow: 'Prezzi',
-  title: 'Un piano per ogni tipo di host',
-  subtitle: 'Prova 14 giorni senza carta di credito. Disdici quando vuoi, i contenuti restano tuoi.',
-  plans: [
-    {
-      id: 'start',
-      name: 'Start',
-      tagline: 'Per chi ha una casa sola',
-      monthly: 9,
-      yearly: 7,
-      cta: 'Inizia gratis',
-      features: [
-        '1 appartamento',
-        'Fino a 10 sezioni',
-        '2 lingue',
-        'Link + QR da stampare',
-        'Aggiornamenti illimitati',
-        'Supporto via email',
-      ],
-    },
-    {
-      id: 'pro',
-      name: 'Pro',
-      tagline: 'Per chi gestisce più unità',
-      monthly: 24,
-      yearly: 19,
-      cta: 'Prova 14 giorni',
-      highlight: 'Il più scelto',
-      features: [
-        'Fino a 5 appartamenti',
-        'Sezioni illimitate',
-        '5 lingue con traduzione automatica',
-        'Dominio personalizzato',
-        'Logo, colori e font tuoi',
-        'Statistiche di utilizzo',
-        'Chat diretta host ↔ ospite',
-        'Supporto prioritario',
-      ],
-    },
-    {
-      id: 'studio',
-      name: 'Studio',
-      tagline: 'Per property manager e strutture',
-      monthly: 79,
-      yearly: 65,
-      cta: 'Parliamone',
-      features: [
-        'Appartamenti illimitati',
-        'Gestione a team con ruoli',
-        'Contenuti condivisi tra le case',
-        'Setup fatto da noi',
-        'Integrazione con il tuo PMS',
-        'Upsell: late check-out, transfer, tour',
-        'Referente dedicato',
-      ],
-    },
-  ],
-  note: 'Prezzi per appartamento al mese, IVA esclusa. Il setup completo fatto da noi parte da 149 € una tantum.',
+  eyebrow: 'Prezzo',
+  title: 'Una formula sola, pagata una volta',
+  subtitle: 'Niente piani da confrontare, niente rinnovi a sorpresa. L’unica scelta è se vuoi l’assistenza.',
+  main: {
+    badge: 'Una tantum',
+    price: '49',
+    unit: 'per struttura',
+    lead: 'Paghi alla consegna, quando la web app è online e ti piace.',
+    cta: 'Richiedi la tua casa',
+    includes: [
+      'Web app costruita sui tuoi contenuti',
+      'Sezioni su misura: check-in, Wi-Fi, trasporti, ristoranti, regole, check-out',
+      'Fino a 5 lingue',
+      'Link e QR pronti da stampare',
+      'Pubblicazione online inclusa',
+      'Contenuti e sorgente tuoi, per sempre',
+    ],
+  },
+  addon: {
+    badge: 'Opzionale',
+    title: 'Assistenza',
+    lead: 'Primi 3 mesi inclusi, gratis.',
+    body: 'Modifiche ai testi, cambio password del Wi-Fi, nuove sezioni: ce ne occupiamo noi. Poi la web app resta statica e non ha bisogno di manutenzione.',
+    rows: [
+      { k: 'Mesi 1 – 3', v: 'Inclusa', tone: 'free' },
+      { k: 'Mesi 4 – 6', v: '19 €', tone: 'paid' },
+      { k: 'Da lì in poi', v: 'Nessun costo' },
+    ],
+  },
+  note: 'Prezzi IVA esclusa. Nessun canone mensile, nessun vincolo di permanenza.',
 }
 
 export const reviews = {
   eyebrow: 'Recensioni',
   title: 'Chi ha smesso di rispondere alle stesse domande',
+  hint: 'Scorri per leggerle tutte →',
   items: [
     {
       quote:
-        'Prima ricevevo otto messaggi per ogni soggiorno, sempre gli stessi. Dopo Ospita ne ricevo uno, di solito per dirmi che la casa è bellissima.',
+        'Prima ricevevo otto messaggi per ogni soggiorno, sempre gli stessi. Dopo LaMiaCasa ne ricevo uno, di solito per dirmi che la casa è bellissima.',
       name: 'Giulia Ferraro',
       role: 'Host · 2 appartamenti, Bologna',
       score: 5,
     },
     {
       quote:
-        'L’ho attivato su undici unità in una settimana. Il team di pulizia ha finalmente un posto dove leggere le istruzioni aggiornate.',
+        'L’ho fatto fare per undici unità. Il team di pulizia ha finalmente un posto dove leggere le istruzioni giuste.',
       name: 'Marco Delrio',
       role: 'Property manager · Costa Smeralda',
       score: 5,
@@ -227,14 +205,14 @@ export const reviews = {
     },
     {
       quote:
-        'La sezione trasporti da sola vale l’abbonamento. Nessuno mi chiede più quale bus prendere dall’aeroporto.',
+        'La sezione trasporti da sola vale i 49 euro. Nessuno mi chiede più quale bus prendere dall’aeroporto.',
       name: 'Andrea Pisani',
       role: 'Host · Bergamo',
       score: 5,
     },
     {
       quote:
-        'Ho messo il QR in una cornice sul tavolo. Tre ospiti su quattro lo aprono nei primi cinque minuti: lo vedo dalle statistiche.',
+        'Ho messo il QR in una cornice sul tavolo. Gli ospiti lo aprono appena entrano, senza che io dica niente.',
       name: 'Sofia Marchetti',
       role: 'Host · Lago di Como',
       score: 5,
@@ -253,13 +231,9 @@ export const contact = {
   eyebrow: 'Contatti',
   title: 'Raccontaci la tua casa',
   subtitle:
-    'Rispondiamo entro un giorno lavorativo. Se preferisci, prepariamo insieme una demo con i contenuti reali del tuo appartamento — gratis.',
-  bullets: [
-    'Demo personalizzata in 24 ore',
-    'Migrazione dei contenuti inclusa',
-    'Nessun vincolo di permanenza',
-  ],
-  subjects: ['Voglio una demo', 'Ho più appartamenti', 'Domande sui prezzi', 'Altro'],
+    'Rispondiamo entro un giorno lavorativo. Se preferisci, prepariamo prima una demo con i contenuti reali del tuo appartamento — gratis.',
+  bullets: ['Demo personalizzata in 24 ore', 'Paghi solo alla consegna', 'Assistenza inclusa per 3 mesi'],
+  subjects: ['Voglio una demo', 'Ho più strutture', 'Domande sul prezzo', 'Altro'],
 }
 
 export const footer = {
@@ -267,15 +241,15 @@ export const footer = {
   columns: [
     {
       title: 'Prodotto',
-      links: ['Funzionalità', 'Personalizzazione', 'Lingue', 'Statistiche', 'Novità'],
+      links: ['Sezioni', 'Personalizzazione', 'Lingue', 'Demo live', 'Novità'],
     },
     {
       title: 'Risorse',
-      links: ['Guida rapida', 'Modelli pronti', 'Casi studio', 'Assistenza', 'Stato del servizio'],
+      links: ['Come funziona', 'Domande frequenti', 'Assistenza', 'Guida al QR'],
     },
     {
       title: 'Azienda',
-      links: ['Chi siamo', 'Lavora con noi', 'Privacy', 'Termini', 'Cookie'],
+      links: ['Chi siamo', 'Privacy', 'Termini', 'Cookie'],
     },
   ],
 }

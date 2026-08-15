@@ -1,12 +1,11 @@
-import { useState } from 'react'
 import Icon from './Icon.jsx'
 import { pricing } from '../content.js'
 
 export default function Pricing() {
-  const [yearly, setYearly] = useState(true)
+  const { main, addon } = pricing
 
   return (
-    <section className="section" id="prezzi">
+    <section className="section" id="prezzo">
       <div className="container">
         <header className="section__head" data-reveal>
           <span className="eyebrow">{pricing.eyebrow}</span>
@@ -14,64 +13,52 @@ export default function Pricing() {
           <p>{pricing.subtitle}</p>
         </header>
 
-        <div className="toggle" data-reveal>
-          <button
-            type="button"
-            className={!yearly ? 'is-on' : ''}
-            onClick={() => setYearly(false)}
-            aria-pressed={!yearly}
-          >
-            Mensile
-          </button>
-          <button
-            type="button"
-            className={yearly ? 'is-on' : ''}
-            onClick={() => setYearly(true)}
-            aria-pressed={yearly}
-          >
-            Annuale <em>−20%</em>
-          </button>
-        </div>
+        <div className="offer">
+          <article className="card offer__main" data-reveal>
+            <div className="card__glow" aria-hidden="true" />
+            <span className="offer__badge">{main.badge}</span>
 
-        <p className="swipe-hint">Scorri per confrontare i piani →</p>
+            <p className="offer__price">
+              <span className="offer__num">{main.price}</span>
+              <span className="offer__cur">€</span>
+            </p>
+            <p className="offer__unit">{main.unit}</p>
+            <p className="offer__lead">{main.lead}</p>
 
-        <div className="plans">
-          {pricing.plans.map((plan, i) => (
-            <article
-              key={plan.id}
-              className={`card plan ${plan.highlight ? 'plan--hot' : ''}`}
-              data-reveal
-              style={{ '--d': `${i * 0.08}s` }}
-            >
-              {plan.highlight && <span className="plan__flag">{plan.highlight}</span>}
-              <div className="card__glow" aria-hidden="true" />
+            <a className="btn btn--primary btn--full btn--lg" href="#contatti">
+              {main.cta}
+              <Icon name="arrow" size={16} strokeWidth={2} />
+            </a>
 
-              <h3 className="plan__name">{plan.name}</h3>
-              <p className="plan__tagline">{plan.tagline}</p>
+            <ul className="offer__list">
+              {main.includes.map((f) => (
+                <li key={f}>
+                  <Icon name="check" size={17} strokeWidth={1.8} />
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </article>
 
-              <p className="plan__price">
-                <span className="plan__cur">€</span>
-                <span className="plan__num">{yearly ? plan.yearly : plan.monthly}</span>
-                <span className="plan__per">/mese</span>
-              </p>
-              <p className="plan__cycle">
-                {yearly ? 'fatturato annualmente' : 'fatturato mensilmente'}
-              </p>
+          <article className="card offer__addon" data-reveal style={{ '--d': '.08s' }}>
+            <div className="card__glow" aria-hidden="true" />
+            <span className="offer__badge offer__badge--soft">{addon.badge}</span>
 
-              <a className={`btn ${plan.highlight ? 'btn--primary' : 'btn--glass'} btn--full`} href="#contatti">
-                {plan.cta}
-              </a>
+            <h3 className="offer__title">{addon.title}</h3>
+            <p className="offer__free">{addon.lead}</p>
 
-              <ul className="plan__list">
-                {plan.features.map((f) => (
-                  <li key={f}>
-                    <Icon name="check" size={17} strokeWidth={1.8} />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
+            <ul className="ladder">
+              {addon.rows.map((r) => (
+                <li key={r.k} className={`ladder__row ${r.tone ? `is-${r.tone}` : ''}`}>
+                  <span className="ladder__dot" />
+                  <span className="ladder__k">{r.k}</span>
+                  <span className="ladder__v">{r.v}</span>
+                </li>
+              ))}
+            </ul>
+
+            <p className="offer__body">{addon.body}</p>
+          </article>
         </div>
 
         <p className="plans__note" data-reveal>

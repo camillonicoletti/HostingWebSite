@@ -39,10 +39,10 @@ export default function Navbar() {
 
         <div className="nav__actions">
           <a className="btn btn--ghost nav__login" href="#contatti">
-            Accedi
+            Contatti
           </a>
-          <a className="btn btn--primary" href="#prezzi">
-            Inizia gratis
+          <a className="btn btn--primary" href="#contatti">
+            Richiedi la tua
           </a>
           <button
             type="button"
@@ -68,8 +68,8 @@ export default function Navbar() {
         </div>
 
         <div className="nav__sheet-foot">
-          <a className="btn btn--primary btn--lg btn--full" href="#prezzi">
-            Inizia gratis
+          <a className="btn btn--primary btn--lg btn--full" href="#contatti">
+            Richiedi la tua casa
           </a>
           <a className="nav__sheet-mail" href={`mailto:${brand.email}`}>
             {brand.email}

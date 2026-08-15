@@ -21,7 +21,7 @@ export default function Reviews() {
           <h2>{reviews.title}</h2>
         </header>
 
-        <p className="swipe-hint">Scorri per leggerle tutte →</p>
+        <p className="swipe-hint">{reviews.hint}</p>
 
         <div className="reviews">
           {reviews.items.map((r, i) => (

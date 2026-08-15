@@ -18,8 +18,8 @@ export default function MobileCta() {
   return (
     <div className={`mcta ${show ? 'is-on' : ''}`}>
       <div className="mcta__copy">
-        <b>Da 7 € al mese</b>
-        <span>14 giorni di prova, senza carta</span>
+        <b>49 € una tantum</b>
+        <span>assistenza inclusa 3 mesi</span>
       </div>
       <a className="btn btn--primary" href="#contatti">
         Provala
