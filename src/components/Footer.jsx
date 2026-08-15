@@ -6,10 +6,7 @@ export default function Footer() {
       <div className="container footer__inner">
         <div className="footer__brand">
           <a className="nav__brand" href="#top">
-            <span className="nav__mark" aria-hidden="true">
-              <i />
-            </span>
-            {brand.name}
+            <img className="nav__logo" src="/logo-light.png" alt={brand.name} />
           </a>
           <p>{footer.tagline}</p>
           <div className="footer__social">

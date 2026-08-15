@@ -23,10 +23,7 @@ export default function Navbar() {
     <header className={`nav ${scrolled ? 'is-scrolled' : ''} ${open ? 'is-open' : ''}`}>
       <div className="nav__inner">
         <a className="nav__brand" href="#top" onClick={() => setOpen(false)}>
-          <span className="nav__mark" aria-hidden="true">
-            <i />
-          </span>
-          {brand.name}
+          <img className="nav__logo" src="/logo-light.png" alt={brand.name} />
         </a>
 
         <nav className="nav__links">
