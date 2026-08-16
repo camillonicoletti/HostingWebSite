@@ -17,7 +17,6 @@ export const nav = [
 ]
 
 export const hero = {
-  eyebrow: 'Guest experience · nessuna app da installare',
   title: ['Tutta la tua casa', 'in un solo link.'],
   subtitle:
     'LaMiaCasa raccoglie le istruzioni sparse tra WhatsApp, PDF e bigliettini in una web app elegante: check-in, Wi-Fi, trasporti, ristoranti e check-out a portata di pollice. La paghi una volta e resta tua.',
@@ -75,7 +74,8 @@ export const features = {
 
 export const steps = {
   eyebrow: 'Come funziona',
-  title: 'Dalla tua descrizione alla casa online',
+  title: 'In pochi giorni è pronta, e su misura della tua casa',
+  lead: 'In pochi giorni la web app è finita e online. È completamente personalizzabile: la costruiamo sulle tue richieste e sulle esigenze che cambiano da casa a casa.',
   items: [
     {
       n: '01',

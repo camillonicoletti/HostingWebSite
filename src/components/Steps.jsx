@@ -7,6 +7,7 @@ export default function Steps() {
         <header className="section__head" data-reveal>
           <span className="eyebrow">{steps.eyebrow}</span>
           <h2>{steps.title}</h2>
+          <p>{steps.lead}</p>
         </header>
 
         <ol className="steps">

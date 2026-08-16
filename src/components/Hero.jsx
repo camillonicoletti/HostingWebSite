@@ -15,11 +15,6 @@ export default function Hero() {
 
       <div className="hero__inner container">
         <div className="hero__copy">
-          <span className="pill" data-reveal>
-            <span className="pill__dot" />
-            {hero.eyebrow}
-          </span>
-
           <h1 data-reveal style={{ '--d': '.05s' }}>
             {hero.title[0]}
             <br />
