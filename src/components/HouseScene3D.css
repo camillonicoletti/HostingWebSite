@@ -1,0 +1,40 @@
+/* The 3D house: a WebGL canvas fills the visual, the chapter cards float over
+   its lower edge. Labels are pinned to points inside the room by the renderer.
+   `data-house-stage` follows the camera (set by the component every frame). */
+.house-scene--3d{background:radial-gradient(120% 90% at 50% 20%,#eef0e4 0%,#e3e7d8 60%,#d9dfcf 100%)}
+.house-scene-heading{white-space:nowrap}
+.house-stage{position:absolute;inset:0;overflow:hidden;border-radius:inherit;z-index:4;will-change:opacity}
+.house-scene--3d .house-scene-heading{z-index:6}
+.house-scene--3d .house-scene-caption{z-index:6;transition:opacity .35s}
+.house-scene--3d[data-house-stage="5"] .house-scene-caption{opacity:0}
+/* The finale phone rises underneath the transparent canvas, so the small house
+   is drawn on its screen; then the app shows through as the canvas fades. */
+.house-phone{position:absolute;left:50%;top:50%;width:286px;height:563px;margin:-281.5px 0 0 -143px;z-index:3;pointer-events:none;opacity:calc(var(--phone-in,0)*2.5);transform:translateY(calc(var(--phone-y,0px) + (1 - var(--phone-in,0))*80px)) rotate(calc((1 - var(--phone-in,0))*-5deg)) scale(calc(var(--phone-scale,1)*(.86 + var(--phone-in,0)*.14)))}
+/* Fully risen, the phone takes the pointer and the faded canvas lets it through. */
+.house-scene--3d[data-phone="ready"] .house-phone{pointer-events:auto}
+.house-scene--3d[data-phone="ready"] .house-stage{pointer-events:none}
+.house-phone .guest-header,.house-phone .guest-grid,.house-phone .guest-bottom{opacity:var(--phone-ui,0)}
+.house-phone-caption{position:absolute;bottom:22px;left:12px;right:12px;z-index:5;text-align:center;font-size:11px;letter-spacing:-.1px;color:#3f4a39;pointer-events:none;opacity:var(--phone-ui,0)}
+.house-phone-caption i{font-family:var(--serif);font-style:italic;font-size:14px}
+.house-canvas{display:block;width:100%;height:100%;opacity:0;transition:opacity .9s ease}
+.house-stage[data-ready="true"] .house-canvas{opacity:1}
+.house-label{position:absolute;left:0;top:0;display:inline-flex;align-items:center;gap:7px;padding:8px 12px;margin-top:-10px;background:#fffdf6f0;border:1px solid #fff9;border-radius:100px;font-size:10px;font-weight:550;letter-spacing:.2px;color:#3f4a39;box-shadow:0 8px 22px #3e4b3114;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .35s;will-change:transform}
+.house-label::after{content:'';position:absolute;left:50%;bottom:-5px;width:8px;height:8px;background:#fffdf6;border-right:1px solid #fff9;border-bottom:1px solid #fff9;transform:translateX(-50%) rotate(45deg)}
+.house-label[data-offscreen="true"]{opacity:0!important}
+.house-scene--3d[data-house-stage="1"] .house-label--checkin,.house-scene--3d[data-house-stage="2"] .house-label--wifi,.house-scene--3d[data-house-stage="3"] .house-label--rules,.house-scene--3d[data-house-stage="4"] .house-label--checkout{opacity:1}
+.house-scene--3d .house-cards{z-index:5}
+.house-scene--3d .house-info{opacity:0;visibility:hidden;transform:translateY(8px)}
+.house-scene--3d[data-house-stage="0"] .house-info--0,.house-scene--3d[data-house-stage="1"] .house-info--1,.house-scene--3d[data-house-stage="2"] .house-info--2,.house-scene--3d[data-house-stage="3"] .house-info--3,.house-scene--3d[data-house-stage="4"] .house-info--4{opacity:1;visibility:visible;transform:none}
+.house-scene--3d .house-info--3 .house-info-icon{background:#f5e2d6;color:#ad684e}
+.house-scene--3d .house-info--4 .house-info-icon{background:#e9e4d6;color:#5d6750}
+.house-scene--3d .house-mobile-controls{z-index:7}
+.house-scene--3d .house-mobile-controls button{padding:8px 2px;font-size:8.5px;letter-spacing:0;min-width:0;white-space:nowrap}
+@media(max-width:600px){.house-scene--3d .house-scene-heading{font-size:6.5px;letter-spacing:.9px}.house-scene--3d .house-phone-caption{bottom:95px;font-size:10px}}
+@media(prefers-reduced-motion:reduce){
+  .house-scene--3d .house-canvas{opacity:1;transition:none}
+  .house-scene--3d .house-mobile-controls{position:absolute;bottom:43px;left:18px;right:18px;display:flex;justify-content:center;gap:5px;z-index:3}
+  .house-scene--3d .house-mobile-controls button{background:transparent;border:1px solid #c5cfb9;border-radius:100px;min-height:44px;color:#626f55;flex:1}
+  .house-scene--3d .house-mobile-controls button[aria-pressed="true"]{background:#43513c;color:#f9f7ee;border-color:#43513c}
+  .house-scene--3d .house-cards{bottom:95px}
+  .house-scene--3d .house-phone-caption{bottom:95px}
+}

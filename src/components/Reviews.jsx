@@ -1,47 +1,5 @@
-import { reviews } from '../content.js'
+import { faqs } from '../content.js'
 
-function Stars({ n }) {
-  return (
-    <div className="stars" aria-label={`${n} stelle su 5`}>
-      {Array.from({ length: n }).map((_, i) => (
-        <span key={i} aria-hidden="true">
-          ★
-        </span>
-      ))}
-    </div>
-  )
-}
-
-export default function Reviews() {
-  return (
-    <section className="section section--alt" id="recensioni">
-      <div className="container">
-        <header className="section__head" data-reveal>
-          <span className="eyebrow">{reviews.eyebrow}</span>
-          <h2>{reviews.title}</h2>
-        </header>
-
-        <p className="swipe-hint">{reviews.hint}</p>
-
-        <div className="reviews">
-          {reviews.items.map((r, i) => (
-            <figure key={r.name} className="card review" data-reveal style={{ '--d': `${i * 0.06}s` }}>
-              <div className="card__glow" aria-hidden="true" />
-              <Stars n={r.score} />
-              <blockquote>{r.quote}</blockquote>
-              <figcaption>
-                <span className="review__avatar" aria-hidden="true">
-                  {r.name.charAt(0)}
-                </span>
-                <span>
-                  <b>{r.name}</b>
-                  <small>{r.role}</small>
-                </span>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
+export default function Questions() {
+  return <section className="faq-section wrap" id="domande"><div className="faq-intro" data-reveal><div className="eyebrow">PRIMA DI SENTIRCI</div><h2>Hai una<br /><span className="serif">domanda?</span></h2><p>Partiamo da quelle più utili.</p><a className="text-link" href="#contatti">Parliamone insieme <span>↗</span></a></div><div className="faq-list">{faqs.map((faq, i) => <details key={faq.q} className="faq-item"><summary><span className="faq-number">0{i+1}</span><span>{faq.q}</span><span className="faq-plus" aria-hidden="true">+</span></summary><p>{faq.a}</p></details>)}</div></section>
 }

@@ -1,66 +1,11 @@
 import Icon from './Icon.jsx'
 import PhoneMock from './PhoneMock.jsx'
-import { hero, marquee } from '../content.js'
+import { brand } from '../content.js'
 
 export default function Hero() {
-  return (
-    <section className="hero" id="top">
-      <div className="hero__bg" aria-hidden="true">
-        <div className="hero__grid" />
-        <div className="hero__aurora hero__aurora--1" />
-        <div className="hero__aurora hero__aurora--2" />
-        <div className="hero__aurora hero__aurora--3" />
-        <div className="hero__scan" />
-      </div>
-
-      <div className="hero__inner container">
-        <div className="hero__copy">
-          <h1 data-reveal style={{ '--d': '.05s' }}>
-            {hero.title[0]}
-            <br />
-            <span className="grad">{hero.title[1]}</span>
-          </h1>
-
-          <p className="hero__sub" data-reveal style={{ '--d': '.12s' }}>
-            {hero.subtitle}
-          </p>
-
-          <div className="hero__cta" data-reveal style={{ '--d': '.18s' }}>
-            <a className="btn btn--primary btn--lg" href="#prodotto">
-              {hero.primaryCta}
-              <Icon name="arrow" size={16} strokeWidth={2} />
-            </a>
-            <a className="btn btn--glass btn--lg" href="#come-funziona">
-              <Icon name="play" size={16} strokeWidth={2} />
-              {hero.secondaryCta}
-            </a>
-          </div>
-
-          <dl className="hero__stats" data-reveal style={{ '--d': '.24s' }}>
-            {hero.stats.map((s) => (
-              <div key={s.label}>
-                <dt>{s.value}</dt>
-                <dd>{s.label}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-
-        <div className="hero__visual" data-reveal style={{ '--d': '.1s' }}>
-          <PhoneMock />
-        </div>
-      </div>
-
-      <div className="marquee" aria-hidden="true">
-        <div className="marquee__track">
-          {[...marquee, ...marquee].map((m, i) => (
-            <span key={i}>
-              <i className="marquee__star">✦</i>
-              {m}
-            </span>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
+  return <section className="hero" id="top" data-scroll-scene>
+    <div className="hero-layout wrap"><div className="hero-copy"><div className="eyebrow hero-eyebrow"><span className="live-dot" /> PICCOLE CASE. GRANDI BENVENUTI.</div><h1>La tua casa.<br />Un solo <span className="serif">link.</span><span className="headline-spark" aria-hidden="true">✳</span></h1><p className="hero-description">Le istruzioni della casa, i tuoi consigli, tutte le risposte. Una guida digitale fatta per i tuoi ospiti. E un po’ di tempo in più per te.</p><div className="hero-actions"><a className="button button-coral" href={brand.demo} target="_blank" rel="noreferrer">Entra nella demo <span className="button-icon"><Icon name="arrow" size={19} /></span></a><a className="text-link" href="#come-funziona">Come funziona <span>↓</span></a></div><div className="hero-proof"><span><Icon name="check" size={15} /> Nessuna app da scaricare</span><span><Icon name="check" size={15} /> Si paga una volta</span></div></div>
+    <div className="hero-scene"><div className="scene-orbit scene-orbit--one" /><div className="scene-orbit scene-orbit--two" /><span className="scene-coordinate scene-coordinate--top">L’ACCOGLIENZA, RIDISEGNATA.</span><div className="phone-pedestal" /><div className="hero-phone"><PhoneMock /></div><div className="floating-note floating-note--wifi"><span className="note-icon"><Icon name="wifi" size={24} /></span><div><small>LA DOMANDA DI SEMPRE</small><b>Il Wi-Fi? È già qui.</b></div></div><div className="floating-note floating-note--welcome"><span className="welcome-flower">✳</span><div><b>Fai come fossi a casa.</b><small>Il tuo benvenuto, anche a distanza.</small></div></div><div className="scene-stamp">FATTA PER<br /><span>la tua</span><br />CASA ↗</div><span className="scene-caption">Anteprima interattiva · prova una sezione</span></div></div>
+    <div className="hero-bottom wrap"><span>PER HOST, CASE VACANZE E B&B</span><a href="#prodotto">C’è una casa da scoprire <span>↓</span></a><span className="hero-index">SCORRI / 01</span></div>
+  </section>
 }

@@ -1,0 +1,54 @@
+/* Fixed isometric house. The camera never rotates; each chapter changes
+   a small, meaningful detail: doorway, warm windows, keys. */
+.product-visual.product-visual--house{background:#e7eadd;isolation:isolate}
+.product-visual.product-visual--house::before{display:none}
+.house-scene{position:relative;width:100%;height:100%;--door:1;--warm:0;--show-arrival:1;--show-stay:0;--show-departure:0}
+.house-scene-heading{position:absolute;top:27px;left:27px;right:27px;display:flex;align-items:center;gap:9px;font-size:8px;font-weight:550;letter-spacing:1.1px;z-index:2}
+.house-mini-star{margin-left:auto;color:#89977a;font-size:22px;font-weight:400;line-height:1}
+.house-art{position:absolute;inset:40px 0 105px;display:grid;place-items:center}
+.house-diorama{position:relative;width:100%;max-height:100%;overflow:visible}
+.house-halo{position:absolute;width:76%;aspect-ratio:1;border:1px solid #cdd5c0;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-53%)}
+.house-halo:before{content:'';position:absolute;inset:28px;border:1px solid #d8decd;border-radius:50%}
+.house-halo:after{content:'';position:absolute;top:16%;left:13%;width:5px;height:5px;background:#bc8064;border-radius:50%}
+.house-door-leaf{transform-origin:0 0;transform:skewY(calc(var(--door)*-32deg)) scaleX(calc(1 - var(--door)*.73));transition:transform 1s cubic-bezier(.22,1,.36,1)}
+.house-entry-light{opacity:calc(var(--door)*.8);transition:opacity .7s}
+.house-welcome-light{opacity:calc(var(--door)*.45);transition:opacity .7s}
+.house-window-lit{opacity:var(--warm);transition:opacity .9s}
+.house-window-glow{opacity:calc(var(--warm)*.55);transition:opacity 1.2s}
+.house-suitcase{opacity:var(--show-arrival);transition:opacity .65s}
+.house-wifi-bubble{opacity:var(--show-stay);transition:opacity .6s}
+.house-keys{opacity:var(--show-departure);transition:opacity .7s}
+.house-cards{position:absolute;left:25px;right:25px;bottom:53px;height:94px}
+.house-info{position:absolute;inset:0;display:flex;gap:13px;align-items:center;padding:15px 18px;background:#fffdf6ed;border:1px solid #fff9;border-radius:13px;box-shadow:0 9px 25px #4552380a;visibility:hidden;opacity:0;transform:translateY(8px);transition:opacity .4s,transform .5s cubic-bezier(.22,1,.36,1),visibility .4s}
+.house-info-icon{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;background:#ebeedf;color:#637653}
+.house-info--1 .house-info-icon{background:#f6e7cf;color:#96714d}
+.house-info--2 .house-info-icon{background:#f5e2d6;color:#ad684e}
+.house-info small{display:block;color:#59634f;font-size:9px;letter-spacing:1px;line-height:1.2;margin-bottom:5px}
+.house-info strong{display:block;font-size:12px;font-weight:550;letter-spacing:-.2px;line-height:1.3}
+.house-info p{font-size:10px;line-height:1.4;color:#59634f;margin-top:4px}
+.house-info-arrow{margin-left:auto;color:#89937b;font-size:19px}
+.house-scene-caption{position:absolute;bottom:24px;left:12px;right:12px;text-align:center;color:#59634f;font-size:10px;line-height:1.5}
+.house-mobile-controls{display:none}
+[data-stage="0"] .house-scene{--door:clamp(0, calc((var(--arrival, 1) - .3)*1.5), 1);--warm:0;--show-arrival:1;--show-stay:0;--show-departure:0}
+[data-stage="1"] .house-scene{--door:0;--warm:1;--show-arrival:0;--show-stay:1;--show-departure:0}
+[data-stage="2"] .house-scene{--door:0;--warm:0;--show-arrival:0;--show-stay:0;--show-departure:1}
+[data-stage="0"] .house-info--0,[data-stage="1"] .house-info--1,[data-stage="2"] .house-info--2{opacity:1;visibility:visible;transform:translateY(0)}
+@media(min-width:601px) and (max-width:900px){.house-scene-heading{font-size:6px;left:19px;right:19px}.house-art{inset:50px -12px 130px}.house-cards{left:14px;right:14px;height:94px}.house-info{padding:12px;gap:9px}.house-info-icon{width:30px;height:30px}.house-info strong{font-size:11px}.house-info p{font-size:10px}.house-info-arrow{display:none}.house-scene-caption{font-size:9px}}
+@media(max-width:600px){
+  .product-visual.product-visual--house{height:470px;min-height:470px}
+  .house-scene-heading{font-size:7px;left:22px;right:22px;top:22px}
+  .house-art{inset:43px -3px 175px}
+  .house-cards{left:18px;right:18px;bottom:95px;height:96px}
+  .house-info{gap:10px;padding:12px 14px}
+  .house-info strong{font-size:12px}.house-info p{font-size:10px}.house-info small{font-size:9px}.house-info-icon{width:33px;height:33px}.house-info-arrow{font-size:17px}
+  .house-scene-caption{bottom:17px;font-size:9px}
+  .house-mobile-controls{position:absolute;bottom:43px;left:18px;right:18px;display:flex;justify-content:center;gap:5px}
+  .house-mobile-controls button{background:transparent;border:1px solid #c5cfb9;border-radius:100px;padding:8px 15px;min-height:44px;font-size:10px;color:#626f55;flex:1}
+  .house-mobile-controls button[aria-pressed="true"]{background:#43513c;color:#f9f7ee;border-color:#43513c}
+  .house-scene[data-mobile-stage="0"]{--door:1;--warm:0;--show-arrival:1;--show-stay:0;--show-departure:0}
+  .house-scene[data-mobile-stage="1"]{--door:0;--warm:1;--show-arrival:0;--show-stay:1;--show-departure:0}
+  .house-scene[data-mobile-stage="2"]{--door:0;--warm:0;--show-arrival:0;--show-stay:0;--show-departure:1}
+  .house-scene[data-mobile-stage] .house-info{opacity:0;visibility:hidden;transform:translateY(8px)}
+  .house-scene[data-mobile-stage="0"] .house-info--0,.house-scene[data-mobile-stage="1"] .house-info--1,.house-scene[data-mobile-stage="2"] .house-info--2{opacity:1;visibility:visible;transform:none}
+}
+@media(prefers-reduced-motion:reduce){.house-scene *{transition:none!important;animation:none!important}.house-door-leaf{transform:none}}
