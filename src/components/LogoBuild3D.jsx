@@ -1,10 +1,20 @@
 import { useEffect, useRef, useState } from 'react'
+import { updateGuideStyle, useGuideStyle } from '../lib/guideStyle.js'
 
 // The brand mark assembling itself in 3D as the "come funziona" section
-// scrolls, with a tint slider underneath: every colour of the mark turns
-// together, a small taste of making the guide one's own. Falls back to the
-// flat mark where WebGL is unavailable.
-const BASE = { disc: '#C9755B', accent: '#f29a7f' }
+// scrolls, with a small colour studio underneath: pick the part (disc or
+// arrow), then a tint on the slider or a ready swatch — a taste of making the
+// guide one's own. Falls back to the flat mark where WebGL is unavailable.
+const BASE = { disc: '#C9755B', accent: '#f29a7f', arrow: '#E0835C' }
+// Arrow swatches: `null` keeps the ivory arrow of the original mark.
+const ARROWS = [
+  { name: 'Avorio', color: null, swatch: '#F4F0E6' },
+  { name: 'Inchiostro', color: '#2F352F' },
+  { name: 'Corallo', color: '#EE785A' },
+  { name: 'Oro', color: '#E2AE48' },
+  { name: 'Salvia', color: '#7F9A72' },
+  { name: 'Oceano', color: '#3F7FA6' },
+]
 const PRESETS = [
   { name: 'Terracotta', hue: 0 },
   { name: 'Oliva', hue: 55 },
@@ -53,7 +63,12 @@ function FlatMark() {
 
 export default function LogoBuild3D() {
   const [webgl, setWebgl] = useState(null)
-  const [hue, setHue] = useState(0)
+  const [part, setPart] = useState('disc')
+  // Colours live in the shared guide style, so every phone preview follows.
+  // The arrow is either a swatch (by name) or a tint picked on the slider.
+  const { discHue, arrow } = useGuideStyle()
+  const setDiscHue = value => updateGuideStyle({ discHue: value })
+  const setArrow = value => updateGuideStyle({ arrow: value })
   const canvasRef = useRef(null)
   const worldRef = useRef(null)
   const wakeRef = useRef(() => {})
@@ -88,7 +103,8 @@ export default function LogoBuild3D() {
     }
     const wake = () => { if (visible && !frame && !disposed) frame = requestAnimationFrame(tick) }
     wakeRef.current = wake
-    const resize = () => { if (world) { world.setSize(host.clientWidth, host.clientHeight); wake() } }
+    // Size the renderer to the canvas itself: the box also holds the colour panel.
+    const resize = () => { if (world) { world.setSize(canvas.clientWidth, canvas.clientHeight); wake() } }
 
     import('../lib/logoScene.js').then(({ createLogoScene }) => {
       if (disposed) return
@@ -100,7 +116,7 @@ export default function LogoBuild3D() {
     const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; wake() }, { rootMargin: '120px' })
     observer.observe(host)
     const sizer = new ResizeObserver(resize)
-    sizer.observe(host)
+    sizer.observe(canvas)
     window.addEventListener('scroll', wake, { passive: true })
     reduced.addEventListener('change', wake)
     return () => {
@@ -115,19 +131,32 @@ export default function LogoBuild3D() {
   }, [webgl])
 
   // The chosen tint recolours the mark and the section's own accents.
+  // The chosen colours recolour the mark and the section's own accents.
   useEffect(() => {
-    worldRef.current?.setHue(hue)
+    worldRef.current?.setColors({ disc: discHue, arrow: arrow.color })
     worldRef.current?.render()
     const section = canvasRef.current?.closest('.process-section')
-    section?.style.setProperty('--tint-accent', shiftHue(BASE.accent, hue))
-    section?.style.setProperty('--tint-disc', shiftHue(BASE.disc, hue))
-  }, [hue, webgl])
+    section?.style.setProperty('--tint-accent', shiftHue(BASE.accent, discHue))
+    section?.style.setProperty('--tint-disc', shiftHue(BASE.disc, discHue))
+  }, [discHue, arrow, webgl])
+
+  const onDisc = part === 'disc'
+  const hue = onDisc ? discHue : arrow.hue
+  const name = onDisc ? nearest(discHue).name : arrow.name
+  const slide = value => onDisc ? setDiscHue(value) : setArrow({ name: nearest(value).name, color: shiftHue(BASE.arrow, value), hue: value })
+  const thumb = onDisc ? shiftHue(BASE.disc, discHue) : arrow.color || '#F4F0E6'
+  const arrowTrack = `linear-gradient(90deg, ${Array.from({ length: 13 }, (_, i) => shiftHue(BASE.arrow, i * 30)).join(', ')})`
 
   const tint = <div className="logo-tint">
-    <label className="logo-tint-label" htmlFor="logo-tint">IL TUO COLORE <i className="logo-tint-name">{nearest(hue).name}</i></label>
-    <input id="logo-tint" className="logo-tint-range" type="range" min="0" max="359" value={hue} style={{ '--tint-track': track }} aria-valuetext={nearest(hue).name} onChange={e => setHue(Number(e.target.value))} />
-    <div className="logo-tint-presets" role="group" aria-label="Tinte pronte">
-      {PRESETS.map(preset => <button key={preset.name} type="button" title={preset.name} aria-label={preset.name} aria-pressed={hue === preset.hue} style={{ '--swatch': shiftHue(BASE.disc, preset.hue) }} onClick={() => setHue(preset.hue)} />)}
+    <div className="logo-tint-parts" role="tablist" aria-label="Cosa vuoi colorare">
+      {[['disc', 'Sfondo'], ['arrow', 'Freccia']].map(([key, label]) => <button key={key} type="button" role="tab" aria-selected={part === key} onClick={() => setPart(key)}>{label}</button>)}
+    </div>
+    <label className="logo-tint-label" htmlFor="logo-tint">{onDisc ? 'COLORE DI SFONDO' : 'COLORE DELLA FRECCIA'} <i className="logo-tint-name">{name}</i></label>
+    <input id="logo-tint" className="logo-tint-range" type="range" min="0" max="359" value={hue} style={{ '--tint-track': onDisc ? track : arrowTrack, '--thumb': thumb }} aria-valuetext={name} onChange={e => slide(Number(e.target.value))} />
+    <div className="logo-tint-presets" role="group" aria-label={onDisc ? 'Sfondi pronti' : 'Frecce pronte'}>
+      {onDisc
+        ? PRESETS.map(preset => <button key={preset.name} type="button" title={preset.name} aria-label={preset.name} aria-pressed={discHue === preset.hue} style={{ '--swatch': shiftHue(BASE.disc, preset.hue) }} onClick={() => setDiscHue(preset.hue)} />)
+        : ARROWS.map(swatch => <button key={swatch.name} type="button" title={swatch.name} aria-label={swatch.name} aria-pressed={arrow.name === swatch.name && arrow.color === swatch.color} style={{ '--swatch': swatch.swatch || swatch.color }} onClick={() => setArrow({ name: swatch.name, color: swatch.color, hue: arrow.hue })} />)}
     </div>
   </div>
 

@@ -80,7 +80,7 @@ export default function HouseScene3D() {
     // on small screens, by the stage buttons.
     const phoneRect = (w, h) => {
       const controls = controlsRef.current && getComputedStyle(controlsRef.current).display !== 'none'
-      const top = 50, bottom = h - (controls ? 112 : 44)
+      const top = 50, bottom = h - (controls ? 124 : 72)
       return { scale: Math.min(1, (bottom - top) / PHONE.h, (w - 56) / PHONE.w), cy: (top + bottom) / 2 }
     }
     const finale = (p, w, h) => {

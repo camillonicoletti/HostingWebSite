@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
 import { createHouseScrollProgress, createRunway } from '../lib/houseScroll.js'
 
+const HOUSE_STAGES = [0.4, 0.555, 0.86]
+
 export default function useMotion() {
   useEffect(() => {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -21,7 +23,10 @@ export default function useMotion() {
         const previous = node.style.getPropertyValue('--progress')
         node.style.setProperty('--progress', progress.toFixed(4))
         node.style.setProperty('--arrival', arrival.toFixed(4))
-        node.dataset.stage = String(Math.min(2, Math.floor(progress * 3)))
+        // The house story has its own beats: rules board, check-out sign, phone.
+        node.dataset.stage = houseProgress.has(node)
+          ? String(HOUSE_STAGES.filter(start => progress >= start).length)
+          : String(Math.min(2, Math.floor(progress * 3)))
         // Notify the renderer after writing progress, including offscreen resets.
         if (houseProgress.has(node) && previous !== progress.toFixed(4)) node.dispatchEvent(new Event('sceneprogress'))
       })

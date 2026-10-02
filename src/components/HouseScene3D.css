@@ -13,8 +13,8 @@
 /* Fully risen, the phone takes the pointer and the faded canvas lets it through. */
 .house-scene--3d[data-phone="ready"] .house-phone{pointer-events:auto}
 .house-scene--3d[data-phone="ready"] .house-stage{pointer-events:none}
-.house-phone .guest-header,.house-phone .guest-grid,.house-phone .guest-bottom{opacity:var(--phone-ui,0)}
-.house-phone-caption{position:absolute;bottom:22px;left:12px;right:12px;z-index:5;text-align:center;font-size:11px;letter-spacing:-.1px;color:#3f4a39;pointer-events:none;opacity:var(--phone-ui,0)}
+.house-phone .app-top,.house-phone .app-grid,.house-phone .app-dock{opacity:var(--phone-ui,0)}
+.house-phone-caption{position:absolute;bottom:26px;left:12px;right:12px;z-index:5;text-align:center;font-size:11px;letter-spacing:-.1px;color:#3f4a39;pointer-events:none;opacity:var(--phone-ui,0)}
 .house-phone-caption i{font-family:var(--serif);font-style:italic;font-size:14px}
 .house-canvas{display:block;width:100%;height:100%;opacity:0;transition:opacity .9s ease}
 .house-stage[data-ready="true"] .house-canvas{opacity:1}

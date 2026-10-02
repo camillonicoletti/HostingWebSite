@@ -95,19 +95,26 @@ export function createLogoScene(canvas, paletteName = DEFAULT_PALETTE) {
   // Box faces run +x −x +y −y +z −z; extrusions are [caps, walls].
   const boxed = (top, side) => [side, side, side, side, top, top]
   const extruded = (top, side) => [top, side]
-  let gradient = null, hue = 0, current = paletteName
-  // Every colour of the palette turns together around the hue wheel, so any
-  // tint the visitor picks keeps the same light/dark balance as the original.
+  let gradient = null, hue = 0, arrow = null, current = paletteName
+  // The disc turns around the hue wheel, keeping the palette's light/dark
+  // balance; the arrow can take its own colour, its flanks a deeper shade.
   const shift = value => {
     if (!hue || value === 'disc') return value
     const c = new THREE.Color(value), hsl = {}
     c.getHSL(hsl)
     return '#' + c.setHSL((hsl.h + hue / 360 + 1) % 1, hsl.s, hsl.l).getHexString()
   }
+  const deepen = value => {
+    const c = new THREE.Color(value), hsl = {}
+    c.getHSL(hsl)
+    return '#' + c.setHSL(hsl.h, Math.min(1, hsl.s * 1.05), hsl.l * 0.62).getHexString()
+  }
   const paint = name => {
     const base = PALETTES[name] || PALETTES[DEFAULT_PALETTE]
     current = name
-    const palette = { disc: base.disc.map(shift), house: shift(base.house), core: shift(base.core), sides: base.sides && shift(base.sides) }
+    const palette = arrow
+      ? { disc: base.disc.map(shift), house: base.house, core: arrow, sides: deepen(arrow) }
+      : { disc: base.disc.map(shift), house: base.house, core: base.core, sides: base.sides && shift(base.sides) }
     gradient?.dispose()
     gradient = gradientTexture(palette.disc)
     tinted.map = gradient; tinted.needsUpdate = true
@@ -207,7 +214,7 @@ export function createLogoScene(canvas, paletteName = DEFAULT_PALETTE) {
     camera.aspect = w / Math.max(1, h)
     // Keep the mark the same on-screen size whatever the box's aspect.
     const fit = Math.min(1, camera.aspect / 1.05)
-    camera.fov = THREE.MathUtils.radToDeg(2 * Math.atan(Math.tan(THREE.MathUtils.degToRad(15)) / fit))
+    camera.fov = THREE.MathUtils.radToDeg(2 * Math.atan(Math.tan(THREE.MathUtils.degToRad(12.8)) / fit))
     camera.updateProjectionMatrix()
     setProgress(progress)
   }
@@ -219,6 +226,7 @@ export function createLogoScene(canvas, paletteName = DEFAULT_PALETTE) {
   }
   setProgress(0)
   if (import.meta.env.DEV) canvas.addEventListener('logo:debug', () => { if (canvas.dataset.debugPalette) paint(canvas.dataset.debugPalette); setProgress(parseFloat(canvas.dataset.debugProgress) || 0); render() })
-  const setHue = degrees => { hue = degrees; paint(current) }
-  return { setProgress, setSize, render, dispose, paint, setHue }
+  // disc: hue turn in degrees; arrow: a colour, or null for the palette's own.
+  const setColors = ({ disc = hue, arrow: next = arrow } = {}) => { hue = disc; arrow = next; paint(current) }
+  return { setProgress, setSize, render, dispose, paint, setColors }
 }
