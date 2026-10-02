@@ -6,8 +6,9 @@ const HOUSE_STAGES = [0.4, 0.555, 0.86]
 export default function useMotion() {
   useEffect(() => {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const phone = window.matchMedia('(max-width: 600px)')
     const scenes = [...document.querySelectorAll('[data-scroll-scene]')]
-    const houseProgress = new Map(scenes.filter(node => node.hasAttribute('data-house-scroll')).map(node => [node, createHouseScrollProgress(createRunway(node))]))
+    const houseProgress = new Map(scenes.filter(node => node.hasAttribute('data-house-scroll')).map(node => [node, createHouseScrollProgress(createRunway(node), { skipBack: () => phone.matches })]))
     const reveals = [...document.querySelectorAll('[data-reveal]')]
     let frame = 0
     const update = () => {

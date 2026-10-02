@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Icon from './Icon.jsx'
 import Logo from './Logo.jsx'
+import PaymentMarks from './PaymentMarks.jsx'
 import { brand, order } from '../content.js'
 import { checkoutUrl, orderReference } from '../lib/checkout.js'
 
@@ -15,7 +16,6 @@ const after = [
   { icon: 'sparkle', title: 'Prepariamo la guida', text: 'Ti mandiamo l’anteprima da rivedere.' },
   { icon: 'arrow', title: 'Link e QR pronti', text: 'La condividi con ogni ospite.' },
 ]
-const methods = ['Visa', 'Mastercard', 'Maestro', 'Apple Pay', 'Google Pay', 'PayPal', 'Satispay']
 const euro = value => value.toLocaleString('it-IT', { style: 'currency', currency: 'EUR', minimumFractionDigits: 2 })
 
 function Summary({ open, onToggle }) {
@@ -93,7 +93,7 @@ export default function OrderPage() {
         <section>
           <h2>Pagamento</h2>
           <p className="checkout-hint">Tutte le transazioni sono sicure e crittografate. Completerai il pagamento sulla pagina protetta di Stripe.</p>
-          <div className="checkout-methods">{methods.map(method => <span key={method}>{method}</span>)}</div>
+          <PaymentMarks className="checkout-marks" />
           <label className="checkout-terms"><input type="checkbox" name="terms" required checked={form.terms} onChange={update} /><span>Accetto le condizioni di vendita e l’informativa sulla privacy.</span></label>
           <button className="button button-ink button-full checkout-pay" type="submit">{ready ? `Paga ${euro(order.price)}` : `Ordina ora · ${euro(order.price)}`} <Icon name="arrow" size={19} /></button>
           {error && <p className="order-error" role="alert">{error} <a href={`mailto:${brand.email}?subject=${encodeURIComponent(`Ordine guida — ${form.home.trim() || 'la mia struttura'}`)}`}>{brand.email}</a></p>}

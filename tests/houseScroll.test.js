@@ -49,3 +49,28 @@ test('handles anchor jumps past the story and returning to its start', () => {
   assert.equal(progress(rect(1200), 1000), 0)
   assert.equal(progress(rect(-1500), 1000), 0.5)
 })
+
+test('on phones, turning back mid-story parks on the opening view', () => {
+  const runway = []
+  const progress = createHouseScrollProgress((short, inside) => runway.push([short, inside]), { skipBack: () => true })
+  assert.equal(progress(rect(-1800), 1000), 0.6)
+  assert.equal(progress(rect(-1700), 1000), 0)
+  assert.deepEqual(runway.at(-1), [true, true])
+  assert.equal(progress(rect(-1900), 1000), 0)
+  assert.equal(progress(rect(0), 1000), 0)
+  assert.equal(progress(rect(-600), 1000), 0.2)
+})
+
+test('on phones, turning back before the story has moved changes nothing', () => {
+  const progress = createHouseScrollProgress(() => {}, { skipBack: () => true })
+  assert.equal(progress(rect(500), 1000), 0)
+  assert.equal(progress(rect(600), 1000), 0)
+  assert.equal(progress(rect(-300), 1000), 0.1)
+})
+
+test('on phones, a few pixels of upward jitter do not skip the story', () => {
+  const progress = createHouseScrollProgress(() => {}, { skipBack: () => true })
+  assert.equal(progress(rect(-1800), 1000), 0.6)
+  assert.equal(progress(rect(-1790), 1000), 0.6)
+  assert.equal(progress(rect(-2100), 1000), 0.7)
+})

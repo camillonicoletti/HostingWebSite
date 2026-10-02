@@ -7,7 +7,7 @@ import './HouseScene3D.css'
 
 // The stops of the camera path. `from` is where each chapter card takes over
 // as the camera flies; `progress` is the target used when the journey is driven
-// by buttons (small screens, reduced motion) rather than scroll.
+// by buttons (reduced motion) rather than scroll.
 const moments = [
   { label: 'Arrivo', icon: 'pin', title: 'Il tuo benvenuto è già qui.', detail: 'La porta si apre: si entra in casa', from: 0, progress: 0 },
   { label: 'Check-in', icon: 'pin', title: 'Le istruzioni per entrare.', detail: 'Orari, codici e chiavi, sulla scrivania', from: 0.17, progress: 0.235 },
@@ -61,13 +61,12 @@ export default function HouseScene3D() {
     const host = canvas.parentElement
     const scene = sceneRef.current
     const scrollScene = host.closest('[data-scroll-scene]')
-    const compact = window.matchMedia('(max-width: 600px)')
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
-    let world = null, frame = 0, visible = false, disposed = false
+    let world = null, frame = 0, visible = false, disposed = false, captionBelow = false
     let current = 0, last = 0, ready = false
 
     const target = () => {
-      if (compact.matches || reduced.matches) return moments[stageRef.current].progress
+      if (reduced.matches) return moments[stageRef.current].progress
       return parseFloat(scrollScene?.style.getPropertyValue('--progress')) || 0
     }
     const placeLabel = (label, p, w, h) => {
@@ -77,10 +76,11 @@ export default function HouseScene3D() {
       node.dataset.offscreen = point.visible && p < label.until ? 'false' : 'true'
     }
     // Where the phone sits: centred in the band left free by the heading and,
-    // on small screens, by the stage buttons.
+    // when they are shown (reduced motion), by the stage buttons. On phones the
+    // caption sits under the frame, so the phone can take its place.
     const phoneRect = (w, h) => {
       const controls = controlsRef.current && getComputedStyle(controlsRef.current).display !== 'none'
-      const top = 50, bottom = h - (controls ? 124 : 72)
+      const top = 50, bottom = h - (controls ? 124 : captionBelow ? 24 : 72)
       return { scale: Math.min(1, (bottom - top) / PHONE.h, (w - 56) / PHONE.w), cy: (top + bottom) / 2 }
     }
     const finale = (p, w, h) => {
@@ -104,9 +104,9 @@ export default function HouseScene3D() {
       last = now
       const goal = target()
       const gap = goal - current
-      const reset = !compact.matches && !reduced.matches && goal < current
+      const reset = !reduced.matches && goal < current
       // Scroll is damped so fast wheel flicks still read as one continuous flight.
-      const rate = compact.matches || reduced.matches ? 2.6 : 7
+      const rate = reduced.matches ? 2.6 : 7
       // An offscreen restart snaps to the opening view without a reverse flight.
       current = reduced.matches || reset ? goal : Math.abs(gap) < 0.0004 ? goal : current + gap * (1 - Math.exp(-dt * rate))
       world.setProgress(current)
@@ -118,12 +118,14 @@ export default function HouseScene3D() {
       if (visible && current !== goal) frame = requestAnimationFrame(tick)
     }
     const wake = () => {
-      const reset = !compact.matches && !reduced.matches && target() < current
+      const reset = !reduced.matches && target() < current
       if ((visible || reset) && !frame && !disposed) frame = requestAnimationFrame(tick)
     }
     const resize = () => {
       if (!world) return
       world.setSize(host.clientWidth, host.clientHeight)
+      const caption = scene.querySelector('.house-phone-caption')
+      captionBelow = Boolean(caption) && caption.offsetTop >= host.clientHeight
       wake()
     }
 
@@ -143,7 +145,6 @@ export default function HouseScene3D() {
     document.fonts?.ready.then(wake)
     window.addEventListener('scroll', wake, { passive: true })
     scrollScene?.addEventListener('sceneprogress', wake)
-    compact.addEventListener('change', wake)
     reduced.addEventListener('change', wake)
     return () => {
       disposed = true
@@ -151,7 +152,6 @@ export default function HouseScene3D() {
       observer.disconnect(); sizer.disconnect()
       window.removeEventListener('scroll', wake)
       scrollScene?.removeEventListener('sceneprogress', wake)
-      compact.removeEventListener('change', wake)
       reduced.removeEventListener('change', wake)
       world?.dispose()
     }
