@@ -49,5 +49,5 @@ export const order = {
   product: 'La tua guida ospiti',
   price: 49,
   priceNote: 'per struttura',
-  stripeLink: 'https://buy.stripe.com/test_fZuaEW6ii8Hq9o36fY7wA00',
+  stripeLink: 'https://buy.stripe.com/dRm00jeiKfRmaITePV1kA00',
 }
